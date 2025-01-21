@@ -92,8 +92,11 @@ export class ClickUpAuthWidget extends BaseWidget<ClickUpAuthConfig> {
   }
 
   login(): void {
-    const authUrl = `https://app.clickup.com/api?client_id=${this.config.clientId}&redirect_uri=${encodeURIComponent(this.config.redirectUri)}&response_type=code`;
-    window.location.href = authUrl;
+    const authUrl = new URL('https://app.clickup.com/api/v2/oauth/authorize');
+    authUrl.searchParams.append('client_id', this.config.clientId);
+    authUrl.searchParams.append('redirect_uri', this.config.redirectUri);
+    authUrl.searchParams.append('response_type', 'code');
+    window.location.href = authUrl.toString();
   }
 
   logout(): void {
