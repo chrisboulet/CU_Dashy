@@ -1,0 +1,15 @@
+apiVersion: 1
+
+providers:
+  - name: 'ClickUp Dashboards'
+    orgId: 1
+    folder: 'ClickUp'
+    folderUid: 'clickup'
+    type: file
+    disableDeletion: false
+    editable: true
+    updateIntervalSeconds: 10
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards
+      foldersFromFilesStructure: true

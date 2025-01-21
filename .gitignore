@@ -1,0 +1,56 @@
+# Dépendances
+node_modules/
+dist/
+.npm
+.yarn
+
+# Environnement
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Système
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Build
+/dist
+/build
+*.tsbuildinfo
+
+# Cache
+.cache/
+.temp/
+
+# Docker
+docker-compose.override.yml
+
+# Données persistantes
+/data
+/volumes
+
+# Monitoring
+monitoring/grafana/data/
+monitoring/prometheus/data/
+
+# Tests
+/coverage
+.nyc_output
+
+# Autres
+*.swp
+*.swo
+.env.production

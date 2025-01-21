@@ -1,0 +1,65 @@
+---
+pageInfo:
+  title: ClickUp Monitor
+  description: Monitoring des limites d'API ClickUp
+  icon: far fa-chart-bar
+  theme: dark
+  language: fr
+
+# Configuration de l'authentification
+authentication:
+  enableGuestAccess: false
+  users:
+    - user: admin
+      hash: "$2a$12$..." # À remplacer par un vrai hash bcrypt
+
+# Sections principales
+sections:
+  - name: ClickUp Monitoring
+    icon: fas fa-tachometer-alt
+    displayData:
+      collapsed: false
+      cols: 2
+    widgets:
+      - component: custom-clickup-auth
+        options:
+          title: Authentification ClickUp
+          clientId: process.env.CLICKUP_CLIENT_ID
+          redirectUri: process.env.CLICKUP_REDIRECT_URI
+      
+      - component: custom-api-limits
+        options:
+          title: Limites d'API
+          refreshInterval: 60
+          showChart: true
+          chartType: 'bar'
+          
+  - name: Métriques Système
+    icon: fas fa-chart-line
+    widgets:
+      - component: system-health
+        options:
+          endpoints: 
+            - name: API ClickUp
+              url: https://api.clickup.com/api/v2/user
+              method: GET
+              headers:
+                Authorization: Bearer {process.env.CLICKUP_TOKEN}
+      
+      - component: prometheus-metrics
+        options:
+          port: process.env.PROMETHEUS_PORT
+          metrics:
+            - name: api_calls_total
+              help: Nombre total d'appels API
+            - name: api_limits_remaining
+              help: Limites d'API restantes
+
+  - name: Documentation
+    icon: fas fa-book
+    widgets:
+      - component: iframe
+        options:
+          title: Documentation ClickUp
+          url: https://clickup.com/api
+          height: 400
